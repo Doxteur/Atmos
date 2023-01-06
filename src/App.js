@@ -1,27 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import MeteoComponents from './components/MeteoComponents';
+import Header from './components/Header';
+import FormComponents from './components/FormComponents';
 
 function App() {
 
-
-  const [monstate, setMonstate] = useState(0);
-
-  useEffect(() => {
-    console.log("monstate", monstate);
-  }, [monstate]);
+  // fetch open meteo
+  const [weather, setWeather] = useState(null);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save toe reload.
-        </p>
-        <button onClick={() => setMonstate(monstate + 1)}>Click me</button>
-        <p>{monstate}</p>
-        
-      </header>
+    <div className="h-screen bg-[#1B1D1F]">
+      <FormComponents weather={weather} setWeather={setWeather} />
+
+      <Header weather={weather} setWeather={setWeather} />
+      <MeteoComponents weather={weather} setWeather={setWeather} />
     </div>
   );
 }

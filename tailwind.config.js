@@ -4,7 +4,10 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'russo-one': ['RussoOne', 'sans-serif'],
+    },
     extend: {},
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }
