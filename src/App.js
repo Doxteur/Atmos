@@ -1,13 +1,13 @@
 import "./App.css";
 import React from "react";
-import Counter from "./features/counter/counter";
+import Meteo from "./features/meteo/meteo";
 
 
 function App() {
   return (
     <div className="App">
       <h1>Hello world</h1>
-      <Counter />
+      <Meteo />
     </div>
   );
 }
