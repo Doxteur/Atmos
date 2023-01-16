@@ -1,27 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-import { useEffect, useState } from 'react';
+import "./App.css";
+import React from "react";
+import Counter from "./features/counter/counter";
+
 
 function App() {
-
-
-  const [monstate, setMonstate] = useState(0);
-
-  useEffect(() => {
-    console.log("monstate", monstate);
-  }, [monstate]);
-
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save toe reload.
-        </p>
-        <button onClick={() => setMonstate(monstate + 1)}>Click me</button>
-        <p>{monstate}</p>
-        
-      </header>
+      <h1>Hello world</h1>
+      <Counter />
     </div>
   );
 }
