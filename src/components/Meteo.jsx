@@ -5,12 +5,7 @@ import { fetchCities } from "../features/cities/citiesSlice";
 import { getHour,extractCoordinates } from "../utils/functions";
 import AsyncSelect from "react-select/async";
 
-function Meteo() {
-
-  const meteo = useSelector((state) => state.meteo);
-  const cities = useSelector((state) => state.cities);
-
-  const dispatch = useDispatch();
+function Meteo({meteo,cities,dispatch}) {
 
   useEffect(() => {
     dispatch(fetchData());

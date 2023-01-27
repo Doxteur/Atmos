@@ -1,5 +1,7 @@
 import React from "react";
 import CardMeteoComponent from "./CardMeteoComponent";
+import nuageSoleil from "../assets/Images/nuageSoleil.png";
+import MeteoList from "./MeteoList";
 
 function MeteoByDayComponent() {
   return (
@@ -16,11 +18,9 @@ function MeteoByDayComponent() {
           <h1>Semaine</h1>
         </div>
       </div>
-      <div className="flex">
-        <CardMeteoComponent hour={10}/>
-        <CardMeteoComponent hour={12}/>
-        <CardMeteoComponent hour={14}/>
-        <CardMeteoComponent hour={16}/>
+      <div>
+        <MeteoList />
+       
       </div>
     </div>
   );

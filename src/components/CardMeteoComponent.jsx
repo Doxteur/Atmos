@@ -1,7 +1,6 @@
 import React from 'react'
 // import image nuageSoleil and nuageLune 
 import nuageSoleil from '../assets/Images/nuageSoleil.png'
-import nuageLune from '../assets/Images/nuageLune.png'
 
 
 function CardMeteoComponent({hour}) {

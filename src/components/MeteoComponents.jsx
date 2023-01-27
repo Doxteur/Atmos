@@ -2,51 +2,43 @@ import React, { useEffect, useState } from "react";
 import TemperatureComponent from "./TemperatureComponent";
 import InfoMeteoComponent from "./InfoMeteoComponent";
 import MeteoByDayComponent from "./MeteoByDayComponent";
-import map from "../assets/Images/map.png";
 
-function MeteoComponents({ weather, setWeather, ville, setVille }) {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+import {
+  fetchData,
+  fetchDataByCity,
+  setCity,
+} from "../features/meteo/meteoSlice";
+import { fetchCities } from "../features/cities/citiesSlice";
+import { getHour, extractCoordinates } from "../utils/functions";
+import AsyncSelect from "react-select/async";
+import { useSelector, useDispatch } from "react-redux";
 
+function MeteoComponents() {
+  const meteo = useSelector((state) => state.meteo);
+  const cities = useSelector((state) => state.cities);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    //fetch https://api.open-meteo.com/ with lat and lon
-    fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${ville.lat}&longitude=${ville.lon}&hourly=temperature_2m`
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Something went wrong");
-        }
-      })
-      .then((data) => {
-        setWeather(data);
-        console.log(data);
-        setLoading(false);
+    dispatch(fetchData());
+    dispatch(fetchCities());
+  }, [dispatch]);
 
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
-  }, [setWeather, ville.lat, ville.lon]);
+  const handleChangeCity = (e) => {
+    const { lat, long } = extractCoordinates(e.value);
+    const city = e.label;
+    dispatch(fetchDataByCity(lat, long, city));
+  };
 
-  
-  const weatherInfo = loading ? (
-    <p>Loading...</p>
-  ) : error ? (
-    <p>Something went wrong</p>
-  ) : (
-    <div>
-      <p>Weather: {weather.latitude}</p>
-    </div>
-  );
+  const loadOptions = (inputValue, callback) => {
+    dispatch(fetchCities(inputValue));
+    if (cities.value.length > 0) {
+      return callback(cities.value);
+    }
+  };
 
   return (
     <div>
-      <TemperatureComponent />
+      <TemperatureComponent meteo={meteo} cities={cities} />
       <InfoMeteoComponent />
       <MeteoByDayComponent />
       {/* {weatherInfo} */}

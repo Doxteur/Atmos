@@ -4,6 +4,7 @@ export const meteoSlice = createSlice({
   name: "meteo",
   initialState: {
     value: {},
+    // A changer car deja dans value
     currentWeather: {} ,
     city: "Rennes",
     loading: true,
@@ -16,6 +17,7 @@ export const meteoSlice = createSlice({
     setMeteo: (state, action) => {
       state.value = action.payload;
       state.currentWeather = action.payload.current_weather;
+      // add to currentWeather 
       state.loading = false;
     },
     setError(state, action) {
@@ -34,7 +36,7 @@ export const fetchData = (coord) => async (dispatch) => {
   dispatch(setLoading());
   if(!coord) coord = {latitude: 48.117266, longitude: -1.6777926};
   try {
-    await fetch( `https://api.open-meteo.com/v1/forecast?latitude=${coord.latitude}&longitude=${coord.longitude}&current_weather=true&hourly=temperature_2m&timezone=Europe%2FBerlin`)
+    await fetch( `https://api.open-meteo.com/v1/forecast?latitude=${coord.latitude}&longitude=${coord.longitude}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,precipitation,cloudcover&timezone=Europe%2FBerlin`)
       .then((response) => response.json())
       .then((data) => dispatch(setMeteo(data)))
       .catch((error) => dispatch(setError(error.message)));
