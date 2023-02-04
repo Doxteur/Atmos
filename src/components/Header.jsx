@@ -7,21 +7,36 @@ import telescopeIcon from "../assets/Images/TelescopeIcon.png";
 import AsyncSelect from "react-select/async";
 
 import { fetchCities } from "../features/cities/citiesSlice";
-import { getHour, extractCoordinates } from "../utils/functions";
-import { fetchData, fetchDataByCity } from "../features/meteo/meteoSlice";
+import { extractCoordinates } from "../utils/functions";
+import { fetchDataByCity } from "../features/meteo/meteoSlice";
 
+/**
+ * Header component that shows the current city weather and a search bar to search for a new city.
+ */
 function Header() {
   const meteo = useSelector((state) => state.meteo);
   const cities = useSelector((state) => state.cities);
   const dispatch = useDispatch();
+
   const [searchBar, setSearchBar] = React.useState(false);
+
+  /**
+   * Handles the change of city from the search bar.
+   * @param {Object} e - The selected city object from the search bar.
+   */
 
   const handleChangeCity = (e) => {
     const { lat, long } = extractCoordinates(e.value);
     const city = e.label;
     dispatch(fetchDataByCity(lat, long, city));
+    setSearchBar(false);
   };
 
+   /**
+   * Loads options for the search bar.
+   * @param {String} inputValue - The search input value.
+   * @param {Function} callback - A callback function to pass the options to the search bar.
+   */
   const loadOptions = (inputValue, callback) => {
     if(!inputValue) return callback([]);
     if (inputValue.length < 2) return callback([]);
@@ -31,6 +46,9 @@ function Header() {
     }
   };
 
+  /**
+   * Toggles the search bar visibility.
+   */
   const showSearchBar = () => {
     setSearchBar(!searchBar);
   };
@@ -63,6 +81,7 @@ function Header() {
                 },
 
               })}
+              
             />
           </div>
         ) : (

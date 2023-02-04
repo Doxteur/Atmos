@@ -17,7 +17,7 @@ export const citiesSlice = createSlice({
       action.payload.map((city) => {
         state.value.push({
           value: city.latitude + "," + city.longitude,
-          label: city.name,
+          label: city.name + ", " + city.country
         });
         return state.value;
       });

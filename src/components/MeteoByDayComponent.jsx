@@ -1,6 +1,4 @@
 import React from "react";
-import CardMeteoComponent from "./CardMeteoComponent";
-import nuageSoleil from "../assets/Images/nuageSoleil.png";
 import MeteoList from "./MeteoList";
 
 function MeteoByDayComponent() {

@@ -28,3 +28,11 @@ export const extractCoordinates = (city) => {
   const longitude = coordinates[1];
   return { lat: latitude, long: longitude };
 };
+
+export const findHumidity = (action,state) => {
+  const index = action.payload.hourly.time.findIndex(
+    (item) => item === action.payload.current_weather.time
+  );
+  const humidity = action.payload.hourly.relativehumidity_2m[index];
+  return humidity;
+}

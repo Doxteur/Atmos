@@ -1,12 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useState } from "react";
+import p_nuage from "../assets/Images/p_nuage.png";
 
-import nuageSoleil from "../assets/Images/nuageSoleil.png";
-import nuageLune from "../assets/Images/nuageLune.png";
+import { WeatherCode } from "../data/WeatherCode";
 
 function TemperatureComponent({ meteo, cities }) {
+
+  const [weatherCodeImage, setWeatherCodeImage] = useState(null);
+
   useEffect(() => {
-    console.log("Meteo", meteo);
+    getWeatherIcon(meteo.currentWeather.weathercode);
   }, [meteo]);
+
+  const getWeatherIcon = (code) => {
+    console.log(code);
+    if(WeatherCode[code] != null) {
+      setWeatherCodeImage(WeatherCode[code])
+    }
+  };
 
   return (
     <div>
@@ -17,7 +27,10 @@ function TemperatureComponent({ meteo, cities }) {
           </h1>
           <h1 className="mx-4 text-[#767a87]">Nuageux</h1>
         </div>
-        <img src={nuageLune} alt="nuages" className="w-36" />
+        {/* Name of image is weatherCode */}
+        {weatherCodeImage &&
+        <img src={require(`../assets/Images/${weatherCodeImage}.png`)}  alt="nuageLune" className="w-32" />
+        }
       </div>
     </div>
   );

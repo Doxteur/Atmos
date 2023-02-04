@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchData, fetchDataByCity,setCity } from "../features/meteo/meteoSlice";
+import React, { useEffect } from "react";
+import { fetchData, fetchDataByCity } from "../features/meteo/meteoSlice";
 import { fetchCities } from "../features/cities/citiesSlice";
 import { getHour,extractCoordinates } from "../utils/functions";
 import AsyncSelect from "react-select/async";
