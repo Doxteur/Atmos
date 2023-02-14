@@ -12,7 +12,6 @@ function TemperatureComponent({ meteo, cities }) {
   }, [meteo]);
 
   const getWeatherIcon = (code) => {
-    console.log(code);
     if(WeatherCode[code] != null) {
       setWeatherCodeImage(WeatherCode[code])
     }

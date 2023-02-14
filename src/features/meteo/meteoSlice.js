@@ -38,7 +38,6 @@ export const meteoSlice = createSlice({
     },
     getHumidity: (state, action) => {
       const date = action.payload;
-      console.log();
       const humidity = state.value.hourly.relativehumidity_2m.find(
         (item) => item.time === date
       );
