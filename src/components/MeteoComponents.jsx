@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import TemperatureComponent from "./TemperatureComponent";
 import InfoMeteoComponent from "./InfoMeteoComponent";
 import MeteoByDayComponent from "./MeteoByDayComponent";
+import Header from "./Header";
 
 import {
   fetchData,
@@ -21,6 +22,7 @@ function MeteoComponents() {
 
   return (
     <div>
+      <Header />
       <TemperatureComponent meteo={meteo} cities={cities} />
       <InfoMeteoComponent />
       <MeteoByDayComponent />

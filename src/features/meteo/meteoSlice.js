@@ -10,7 +10,11 @@ export const meteoSlice = createSlice({
     value: {},
     // A changer car deja dans value
     currentWeather: {},
-    city: "Rennes",
+    city: {
+      latitude: 48.117266,
+      longitude: -1.6777926,
+      name: "Rennes",
+    },
     loading: true,
     error: null,
   },
@@ -69,7 +73,13 @@ export const fetchDataByCity = (lat, long, city) => async (dispatch) => {
     )
       .then((response) => response.json())
       .then((data) => dispatch(setMeteo(data)))
-      .then(() => dispatch(setCity(city)))
+      .then(() => dispatch(setCity(
+        {
+          latitude: lat,
+          longitude: long,
+          name: city,
+        }
+      )))
       .catch((error) => dispatch(setError(error.message)));
   } catch (error) {
     dispatch(setError(error.message));

@@ -4,12 +4,19 @@ export const citiesSlice = createSlice({
   name: "cities",
   initialState: {
     value: [],
+    favoriteCities: [],
     loading: true,
     error: null,
   },
   reducers: {
     setLoading: (state) => {
       state.loading = true;
+    },
+    loadFavoriteCities: (state) => {
+      const favoriteCities = JSON.parse(localStorage.getItem("favoriteCities"));
+      if (favoriteCities) {
+        state.favoriteCities = favoriteCities;
+      };
     },
     setCities: (state, action) => {
       state.loading = false;
@@ -26,10 +33,30 @@ export const citiesSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    addFavorite: (state, action) => {
+      state.favoriteCities.push(action.payload);
+      // store in local storage
+      localStorage.setItem(
+        "favoriteCities",
+        JSON.stringify(state.favoriteCities)
+      );
+    },
+    removeFavorite: (state, action) => {
+      state.favoriteCities = state.favoriteCities.filter((city) => {
+        return city.name !== action.payload;
+      });
+
+      // store in local storage
+      localStorage.setItem(
+        "favoriteCities",
+        JSON.stringify(state.favoriteCities)
+      );
+      
+    }
   },
 });
 
-export const { setCities, setLoading, setError } = citiesSlice.actions;
+export const { setCities, setLoading, setError,addFavorite,removeFavorite,loadFavoriteCities } = citiesSlice.actions;
 
 export const fetchCities = (name) => async (dispatch) => {
   dispatch(setLoading());

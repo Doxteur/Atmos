@@ -38,7 +38,7 @@ function Meteo({meteo,cities,dispatch}) {
           <h1>
             La température à {getHour(meteo.currentWeather.time)} h est de :{" "}
             {meteo.currentWeather.temperature} ° dans la ville de :{" "}
-            {meteo.city}
+            {meteo.city.name}
           </h1>
         </div>
       )}
