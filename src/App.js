@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import Meteo from "./features/meteo/meteo";
+import Meteo from "./components/meteo";
 
 // Hello
 function App() {
